@@ -1,113 +1,155 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { Moon, Sun, Mail, Twitter, Github, Linkedin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+const MotionImage = motion(Image);
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", darkMode);
+  }, [darkMode]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className={`min-h-screen ${darkMode ? "dark" : ""}`}>
+      <div className="container mx-auto px-24 py-12 transition-colors duration-200 ease-in-out dark:bg-gray-900 bg-gray-100">
+        <header className="flex justify-between items-center mb-8 sm:mb-12">
+          <motion.h1
+            className="text-xl sm:text-2xl font-bold dark:text-white text-gray-900"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+            &nbsp;
+          </motion.h1>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setDarkMode(!darkMode)}
+            aria-label="Toggle dark mode"
+            className="rounded-full"
+          >
+            {darkMode ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </Button>
+        </header>
+
+        <main className="flex flex-col items-center lg:flex-row lg:items-start justify-between gap-4 lg:gap-8">
+          <motion.div
+            className="w-full lg:w-1/2"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 dark:text-purple-400 text-purple-600">
+              Hey Hey.
+              <br />I am Sachit Malhotra.
+            </h2>
+            <p className="text-lg sm:text-xl mb-4 sm:mb-6 dark:text-white text-gray-800">
+              I&apos;m a{" "}
+              <span className="dark:text-purple-400 text-purple-600 font-semibold">
+                Senior Software Developer
+              </span>{" "}
+              at{" "}
+              <Link
+                href="https://findex.com.au"
+                target="_blank"
+                className="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors duration-200"
+              >
+                Findex
+              </Link>
+              .
+            </p>
+            <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-6 sm:mb-8">
+              <li className="flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-3"></span>
+                Passionate about building products that make a difference.
+              </li>
+              <li className="flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-3"></span>
+                Love to build products that solve real world problems.
+              </li>
+              <li className="flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-3"></span>
+                Build experiences that are delightful and memorable.
+              </li>
+              <li className="flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-3"></span>
+                Love cultivating high performing teams and cultures.
+              </li>
+            </ul>
+            <div className="mb-6 sm:mb-8">
+              <p className="mb-3 sm:mb-4 dark:text-white text-gray-800 font-semibold">
+                Reach me via:
+              </p>
+              <div className="flex space-x-4">
+                {[
+                  {
+                    icon: Mail,
+                    href: "mailto:sachitsac@gmail.com",
+                    label: "Email",
+                  },
+                  {
+                    icon: Twitter,
+                    href: "https://x.com/sachittechB",
+                    label: "X",
+                  },
+                  {
+                    icon: Github,
+                    href: "https://github.com/sachitsac",
+                    label: "GitHub",
+                  },
+                  {
+                    icon: Linkedin,
+                    href: "https://www.linkedin.com/in/sachit-malhotra-64260ab/",
+                    label: "LinkedIn",
+                  },
+                ].map((platform, index) => (
+                  <motion.a
+                    key={index}
+                    href={platform.href}
+                    aria-label={platform.label}
+                    className="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors duration-200"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    target="_blank"
+                  >
+                    <platform.icon className="h-6 w-6" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+          <motion.div
+            className="w-full lg:w-1/2"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <MotionImage
+              src="/sachit.jpeg"
+              alt="Your Name"
+              width={600}
+              height={600}
+              className="profilePic rounded-2xl shadow-2xl w-[500px] h-[500px] object-contain bg-inherit mx-auto"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             />
-          </a>
-        </div>
+          </motion.div>
+        </main>
+        <footer className="mt-8 sm:mt-12 text-center text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+          <p>Sachit Malhotra © {new Date().getFullYear()}</p>
+        </footer>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
