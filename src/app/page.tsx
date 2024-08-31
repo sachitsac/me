@@ -140,7 +140,7 @@ export default function Home() {
               alt="Your Name"
               width={600}
               height={600}
-              className="profilePic rounded-2xl shadow-2xl w-[500px] h-[500px] object-contain bg-inherit mx-auto"
+              className="profilePic rounded-full shadow-2xl w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] object-cover bg-inherit mx-auto"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
