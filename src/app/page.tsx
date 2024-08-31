@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen ${darkMode ? "dark" : ""}`}>
-      <div className="container mx-auto px-24 py-12 transition-colors duration-200 ease-in-out dark:bg-gray-900 bg-gray-100">
+      <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-8 md:py-10 lg:py-12 transition-colors duration-200 ease-in-out dark:bg-gray-900 bg-gray-100">
         <header className="flex justify-between items-center mb-8 sm:mb-12">
           <motion.h1
             className="text-xl sm:text-2xl font-bold dark:text-white text-gray-900"
